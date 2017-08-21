@@ -5,7 +5,7 @@
 [Demo Url](http://hbbcs.oschina.io/bootstrap-addtabs/)
 
 #UPDATE
-- 2017/08/21 增加加载条，$.addtabs.set("loadbar",false)关闭
+ **- 2017/08/21 增加加载条，$.addtabs.set("loadbar",false)关闭** 
 - 2017/04/21 修正更新方式按链接是否使用ajax，修正重复刷新BUG
 - 2017/03/14 更新版本到2.0
 - 2017/02/23 增加拖动，支持HTML5的浏览器可用
