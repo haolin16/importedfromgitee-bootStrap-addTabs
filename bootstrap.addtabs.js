@@ -22,7 +22,8 @@
             'closeThisLabel': '关闭此标签',
             'closeOtherLabel': '关闭其他标签',
             'closeLeftLabel': '关闭左侧标签',
-            'closeRightLabel': '关闭右侧标签'
+            'closeRightLabel': '关闭右侧标签',
+            'loadbar': '正在加载内容，请稍候．．．'
         },
         callback: function () { //关闭后回调函数
         }
@@ -285,7 +286,7 @@
             content = $('#' + id);
             content.html('');
         }
-
+        //加载条
         if (settings.loadbar) {
           content.html($('<div>',{
             'class':''
@@ -298,7 +299,7 @@
               'aria-valuemax': '100',
               'style': 'width:100%'
             }).append('<span class="sr-only">100% Complete</span>')
-            .append('<span>正在加载内容，请稍候．．．</span>')
+            .append('<span>'+settings.local.loadbar+'</span>')
           ));
         }
 
