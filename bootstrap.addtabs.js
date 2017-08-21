@@ -285,7 +285,7 @@
             content = $('#' + id);
             content.html('');
         }
-        //加载条
+
         if (settings.loadbar) {
           content.html($('<div>',{
             'class':''
