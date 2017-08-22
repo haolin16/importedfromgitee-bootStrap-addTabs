@@ -13,7 +13,7 @@
         close: true, //是否可以关闭
         monitor: 'body', //监视的区域
         iframe: false, //使用iframe还是ajax
-        height: $(document).height() - 100, //固定TAB中IFRAME高度,根据需要自己修改
+        height: 300, //固定TAB中IFRAME高度,根据需要自己修改
         target: '.nav-tabs',
         loadbar: true,
         contextmenu: true, //是否使用右键菜单
