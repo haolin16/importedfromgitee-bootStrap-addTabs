@@ -3,7 +3,7 @@
  *
  * Version : 2.0
  *
- * Created by joe on 2016-2-4.Update 2017-08-21
+ * Created by joe on 2016-2-4.Update 2017-08-22
  */
 
 (function ($) {
@@ -13,10 +13,15 @@
         close: true, //是否可以关闭
         monitor: 'body', //监视的区域
         iframe: false, //使用iframe还是ajax
-        iframeHeight: $(window).height() - 100, //固定TAB中IFRAME高度,根据需要自己修改
+        height: $(document).height() - 100, //固定TAB中IFRAME高度,根据需要自己修改
         target: '.nav-tabs',
         loadbar: true,
         contextmenu: true, //是否使用右键菜单
+        ajax: {
+            'async':true,
+            'dataType': 'html',
+            'type': 'get'
+        },
         local: {
             'refreshLabel': '刷新此标签',
             'closeThisLabel': '关闭此标签',
@@ -47,7 +52,7 @@
             'title': a_obj.title ? a_obj.title : obj.html(),
             'content': settings.content ? settings.content : a_obj.content,
             'url': a_obj.url,
-            'ajax': a_obj.ajax ? true : false
+            'ajax': a_obj.ajax ? a_obj.ajax : false
         });
     };
 
@@ -310,14 +315,20 @@
             content.html(
                 $('<iframe>', {
                     'class': 'iframeClass',
-                    'height': settings.iframeHeight,
+                    'height': settings.height,
                     'frameborder': "no",
                     'border': "0",
                     'src': opts.url
                 })
             );
         } else {
-            content.load(opts.url);
+            var ajaxOption=$.extend(settings.ajax, opts.ajax || {});
+            ajaxOption.url=opts.url;
+            ajaxOption.success=function(result) {
+                content.html(result);
+            }
+            $.ajax(ajaxOption);
+
         }
 
         //激活TAB
