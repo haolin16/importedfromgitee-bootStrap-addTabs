@@ -5,6 +5,7 @@
 [Demo Url](http://hbbcs.oschina.io/bootstrap-addtabs/)
 
 #UPDATE
+- **2017/08/22 改变ajax方式，增加ajax参数调用**
 - **2017/08/21 增加加载条，$.addtabs.set("loadbar",false)关闭** 
 - 2017/04/21 修正更新方式按链接是否使用ajax，修正重复刷新BUG
 - 2017/03/14 更新版本到2.0
@@ -49,12 +50,12 @@ ajax调用方式
 json可用参数
 ```
 {
-    "id": 'string',
-    "target": "string|object",
-    "title": "string",
-    "content": "string", //设置content,url将不起作用
-    "url": "string",
-    "ajax": "true|false"
+    "id": string,
+    "target": string|object,
+    "title": string,
+    "content": string, //设置content,url将不起作用
+    "url": string,
+    "ajax": json
 }
 ```
 至此就可以使用此插件。
@@ -93,12 +94,15 @@ iframe       bool          使用iframe，false使用ajax,默认true
 iframeHeight num           固定TAB中IFRAME高度
 callback     function(){}  关闭后回调函数
 contextmenu  bool          是否启用右键菜单，默认true
+loadbar      bool          是否显示加载条，默认是true
+ajax         object        全局调用ajax的默认参数
 local:{
     'refreshLabel': '刷新此标签',
     'closeThisLabel': '关闭此标签',
     'closeOtherLabel': '关闭其他标签',
     'closeLeftLabel': '关闭左侧标签',
-    'closeRightLabel': '关闭右侧标签'
+    'closeRightLabel': '关闭右侧标签'，
+    'loadbar': '正在加载内容，请稍候．．．'
 }
 ```
 设置方法
