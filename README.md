@@ -40,6 +40,12 @@ STEP 2、设置按钮或链接
     用户菜单2
 </a>
 ```
+ajax调用方式
+```
+<a class="list-group-item" data-addtab="mail1"  data-ajax='{"async":false}'  data-url="example/ajax/mailbox.txt">
+    Use Ajax
+</a>
+```
 json可用参数
 ```
 {
