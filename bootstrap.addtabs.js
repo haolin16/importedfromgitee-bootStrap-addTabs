@@ -335,6 +335,7 @@
         tab_li.find('#tab_' + id).addClass('active');
         tab_content.find('#' + id).addClass('active');
         tab_content.find('#' + id).find('#tabCover').remove();
+        $.addtabs.drop();
     };
 
     $.addtabs.close = function (opts) {
