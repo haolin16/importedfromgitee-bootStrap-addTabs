@@ -3,7 +3,7 @@
  *
  * Version : 2.1
  *
- * Created by joe on 2016-2-4.Update 2017-08-22
+ * Created by joe on 2016-2-4.Update 2017-10-12
  */
 
 (function($) {
@@ -28,12 +28,12 @@
      * 默认使用iframe还是ajax,true 是iframe,false是ajax
      * @type {Boolean}
      */
-    iframe: true,
+    iframe: false,
     /**
      * 固定TAB中IFRAME高度,根据需要自己修改
      * @type {Number}
      */
-    height: $(window).height() - 100,
+    height: $(window).height() - 120,
     target: '.nav-tabs',
     /**
      * 显示加载条
@@ -75,8 +75,7 @@
      * 关闭tab回调函数
      * @return {[type]} [description]
      */
-    callback: function() {
-    }
+    callback: function() {}
   };
 
   var target;
@@ -252,19 +251,19 @@
       $('.dragBack').removeClass('dragBack');
     });
 
-    $('body').on('shown.bs.tab','a[data-toggle="tab"]',function() {
-      var id= $(this).parent('li').attr('id').substring(8);
+    $('body').on('shown.bs.tab', 'a[data-toggle="tab"]', function() {
+      var id = $(this).parent('li').attr('id').substring(8);
       if (settings.cookie && $.isFunction($.cookie)) {
-        var tabs=$.parseJSON($.cookie('addtabs'));
-        $.each(tabs,function(k,t){
-          if (t.id==id) {
-            t.active='true';
+        var tabs = $.parseJSON($.cookie('addtabs'));
+        $.each(tabs, function(k, t) {
+          if (t.id == id) {
+            t.active = 'true';
           } else {
             delete t.active;
           }
         });
-        tabs=JSON.stringify(tabs);
-        $.cookie('addtabs',tabs);
+        tabs = JSON.stringify(tabs);
+        $.cookie('addtabs', tabs);
       }
     });
 
@@ -274,15 +273,17 @@
     $.addtabs.set(options);
     _listen();
     if (settings.cookie && $.isFunction($.cookie)) {
-      var tabs=$.cookie('addtabs')?$.parseJSON($.cookie('addtabs')):{};
+      var tabs = $.cookie('addtabs') ? $.parseJSON($.cookie('addtabs')) : {};
       var active;
-      $.each(tabs,function(k,t) {
-        if(t.active) active=k;
+      $.each(tabs, function(k, t) {
+        if (t.active) active = k;
         $.addtabs.add(t);
       });
-      target.find('.active').removeClass('active');
-      $('#tab_'+active).addClass('active');
-      $('#'+active).addClass('active');
+      if (active) {
+        target.find('.active').removeClass('active');
+        $('#tab_' + active).addClass('active');
+        $('#' + active).addClass('active');
+      }
     }
   };
 
@@ -316,11 +317,15 @@
     var tab_li = a_target;
     //写入cookie
     if (settings.cookie && $.isFunction($.cookie)) {
-      var tabs=$.cookie('addtabs')?$.parseJSON($.cookie('addtabs')):{};
-      tabs[id]=opts;
-      tabs[id].target=(typeof tabs[id].target=='object')?settings.target:tabs[id].target;
-      tabs=JSON.stringify(tabs);
-      $.cookie('addtabs',tabs);
+      var tabs = $.cookie('addtabs') ? $.parseJSON($.cookie('addtabs')) : {};
+      tabs[id] = opts;
+      tabs[id].target = (typeof tabs[id].target == 'object') ? settings.target : tabs[id].target;
+      $.each(tabs, function(k, t) {
+        delete t.active;
+      });
+      tabs[id].active = 'true';
+      tabs = JSON.stringify(tabs);
+      $.cookie('addtabs', tabs);
     }
 
     var tab_content = tab_li.next('.tab-content');
@@ -360,6 +365,7 @@
       var content = $('<div>', {
         'class': 'tab-pane',
         'id': id,
+        'height': settings.height - 5,
         'role': 'tabpanel'
       });
 
@@ -433,12 +439,12 @@
     $("#tab_" + opts.id).remove();
     $("#" + opts.id).remove();
     if (settings.cookie && $.isFunction($.cookie)) {
-      var tabs=$.parseJSON($.cookie('addtabs'));
-  console.log(opts.id);
+      var tabs = $.parseJSON($.cookie('addtabs'));
+      console.log(opts.id);
       delete tabs[opts.id];
-      tabs=JSON.stringify(tabs);
+      tabs = JSON.stringify(tabs);
       console.log(tabs);
-      $.cookie('addtabs',tabs);
+      $.cookie('addtabs', tabs);
     }
     $.addtabs.drop();
     settings.callback();
@@ -527,5 +533,6 @@
 })(jQuery);
 
 $(function() {
+
   $.addtabs();
 })
