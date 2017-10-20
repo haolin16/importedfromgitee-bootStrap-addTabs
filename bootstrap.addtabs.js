@@ -266,7 +266,9 @@
         $.cookie('addtabs', tabs);
       }
     });
-
+    $(window).resize(function () {
+      $.addtabs.drop();
+    });
   };
 
   $.addtabs = function(options) {
@@ -330,8 +332,8 @@
 
     var tab_content = tab_li.next('.tab-content');
 
-    tab_li.find('li[role = "presentation"].active').removeClass('active');
-    tab_content.find('div[role = "tabpanel"].active').removeClass('active');
+    tab_li.children('li[role = "presentation"].active').removeClass('active');
+    tab_content.children('div[role = "tabpanel"].active').removeClass('active');
     //如果TAB不存在，创建一个新的TAB
     if (tab_li.find('#tab_' + id).length < 1) {
       var cover = $('<div>', {
