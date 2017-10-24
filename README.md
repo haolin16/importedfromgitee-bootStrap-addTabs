@@ -96,7 +96,7 @@ iframeHeight num           固定TAB中IFRAME高度
 callback     function(){}  关闭后回调函数
 contextmenu  bool          是否启用右键菜单，默认true
 loadbar      bool          是否显示加载条，默认是true
-cookie       bool          将打开的tab页记录到cookie中，刷新页面时自动打开，默认不使用
+store        bool          将打开的tab页记录到客户端存储中，刷新页面时自动打开，默认使用
 ajax         object        全局调用ajax的默认参数
 local:{
     'refreshLabel': '刷新此标签',
