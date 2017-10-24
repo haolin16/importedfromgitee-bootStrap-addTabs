@@ -53,7 +53,12 @@
          * 将打开的tab页记录到本地中，刷新页面时自动打开，默认不使用
          * @type {Boolean}
          */
-        store: true,
+        store: false,
+        /**
+         * 保存的项目名称，为了区分项目
+         * @type {String}
+         */
+        storeName: '',
         /**
          * 内容样式表
          * @type {String}
@@ -277,12 +282,12 @@
             var id = $(this).parent('li').attr('id');
             id = id ? id.substring(8) : '';
             if (settings.store) {
-                var tabs = $.parseJSON(_store('addtabs'));
+                var tabs = $.parseJSON(_store('addtabs'+settings.storeName));
                 $.each(tabs, function (k, t) {
                     (t.id == id) ?(t.active = 'true'):(delete t.active);
                 });
                 tabs = JSON.stringify(tabs);
-                _store('addtabs', tabs);
+                _store('addtabs'+settings.storeName, tabs);
             }
         });
 
@@ -292,7 +297,7 @@
         $.addtabs.set(options);
         _listen();
         if (settings.store) {
-            var tabs = _store('addtabs') ? $.parseJSON(_store('addtabs')) : {};
+            var tabs = _store('addtabs'+settings.storeName) ? $.parseJSON(_store('addtabs'+settings.storeName)) : {};
             var active;
             $.each(tabs, function (k, t) {
                 if (t.active) active = k;
@@ -337,7 +342,7 @@
         var tab_li = a_target;
         //写入cookie
         if (settings.store) {
-          var tabs = _store('addtabs') ? $.parseJSON(_store('addtabs')) : {};
+          var tabs = _store('addtabs'+settings.storeName) ? $.parseJSON(_store('addtabs'+settings.storeName)) : {};
             tabs[id] = opts;
             tabs[id].target = (typeof tabs[id].target == 'object') ? settings.target : tabs[id].target;
             $.each(tabs, function (k, t) {
@@ -345,7 +350,7 @@
             });
             tabs[id].active = 'true';
             tabs = JSON.stringify(tabs);
-            _store('addtabs', tabs);
+            _store('addtabs'+settings.storeName, tabs);
         }
 
         var tab_content = tab_li.next('.tab-content');
@@ -461,10 +466,10 @@
         $("#tab_" + opts.id).remove();
         $("#" + opts.id).remove();
         if (settings.store) {
-            var tabs = $.parseJSON(_store('addtabs'));
+            var tabs = $.parseJSON(_store('addtabs'+settings.storeName));
             delete tabs[opts.id];
             tabs = JSON.stringify(tabs);
-            _store('addtabs', tabs);
+            _store('addtabs'+settings.storeName, tabs);
         }
         $.addtabs.drop();
         settings.callback();
