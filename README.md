@@ -5,9 +5,10 @@
 [Demo Url](http://hbbcs.oschina.io/bootstrap-addtabs/)
 
  **UPDATE** 
-- **2017/10/14 刷新页面保持tabs状态，需要jquery.cookie支持，$.addtabs.set('cookie','true')**
-- **2017/08/22 改变ajax方式，增加ajax参数调用**
-- **2017/08/21 增加加载条，$.addtabs.set("loadbar",false)关闭** 
+- **2017/10/24 刷新页面保持tabs状态，不再需要jquery.cookie支持，转用HTML5 localStorage，$.addtabs.set('store','true')**
+- 2017/10/14 刷新页面保持tabs状态，需要jquery.cookie支持，$.addtabs.set('cookie','true')
+- 2017/08/22 改变ajax方式，增加ajax参数调用
+- 2017/08/21 增加加载条，$.addtabs.set("loadbar",false)关闭
 - 2017/04/21 修正更新方式按链接是否使用ajax，修正重复刷新BUG
 - 2017/03/14 更新版本到2.0
 - 2017/02/23 增加拖动，支持HTML5的浏览器可用
@@ -24,7 +25,7 @@
 - 11月增加了折叠TABS的代码，防止打开过多影响页面
 - 最近在做一个前端，需要点击按钮创建一个可关闭的标签页，没有找到合适的，最后想到不如改造一下bootstrap省事。
 
-#Usage
+**Usage** 
 STEP 1、引入文件
 ```
 <link rel="stylesheet" href="./bootstrap.addtabs.css" type="text/css" media="screen" />
