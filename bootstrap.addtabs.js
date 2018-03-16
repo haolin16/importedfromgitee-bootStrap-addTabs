@@ -438,6 +438,7 @@
         } else {
             var ajaxOption = $.extend(settings.ajax, opts.ajax || {});
             ajaxOption.url = opts.url;
+            ajaxOption.error = function(XMLHttpRequest, textStatus) { content.html(XMLHttpRequest.responseText); };
             ajaxOption.success = function (result) {
                 content.html(result);
             }
