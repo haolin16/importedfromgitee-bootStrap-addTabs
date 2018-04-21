@@ -269,6 +269,11 @@
         var el;
         $('body').on('dragstart.h5s', '.nav-tabs li', function (e) {
             el = $(this);
+            //清除拖动操作携带的数据，否者在部分浏览器上会打开新页面
+            if(e.originalEvent && e.originalEvent.dataTransfer
+                && 'function' == typeof e.originalEvent.dataTransfer.clearData){
+                e.originalEvent.dataTransfer.clearData();
+            }
         }).on('dragover.h5s dragenter.h5s drop.h5s', '.nav-tabs li', function (e) {
             if (el == $(this)) return;
             $('.dragBack').removeClass('dragBack');
