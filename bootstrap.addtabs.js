@@ -278,7 +278,12 @@
             if (el == $(this)) return;
             $('.dragBack').removeClass('dragBack');
             $(this).addClass('dragBack');
-            el.insertAfter($(this))
+            //支持前后调整标签顺序
+            if (el.index() < $(this).index()) {
+                el.insertAfter($(this))
+            } else {
+                $(this).insertAfter(el)
+            }
         }).on('dragend.h5s', '.nav-tabs li', function () {
             $('.dragBack').removeClass('dragBack');
         });
