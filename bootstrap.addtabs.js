@@ -301,6 +301,10 @@
             }
         });
 
+        //浏览器大小改变时自动收放tab
+        $(window).on('resize', function() {
+            $.addtabs.drop();
+        });
     };
 
     $.addtabs = function (options) {
@@ -565,11 +569,6 @@
         })
 
     }
-
-    //浏览器大小改变时自动收放tab
-	$(window).on('resize', function() {
-		$.addtabs.drop();
-	});
 })(jQuery);
 
 $(function () {
