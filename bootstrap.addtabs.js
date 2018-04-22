@@ -269,11 +269,21 @@
         var el;
         $('body').on('dragstart.h5s', '.nav-tabs li', function (e) {
             el = $(this);
+            //清除拖动操作携带的数据，否者在部分浏览器上会打开新页面
+            if(e.originalEvent && e.originalEvent.dataTransfer
+                && 'function' == typeof e.originalEvent.dataTransfer.clearData){
+                e.originalEvent.dataTransfer.clearData();
+            }
         }).on('dragover.h5s dragenter.h5s drop.h5s', '.nav-tabs li', function (e) {
             if (el == $(this)) return;
             $('.dragBack').removeClass('dragBack');
             $(this).addClass('dragBack');
-            el.insertAfter($(this))
+            //支持前后调整标签顺序
+            if (el.index() < $(this).index()) {
+                el.insertAfter($(this))
+            } else {
+                $(this).insertAfter(el)
+            }
         }).on('dragend.h5s', '.nav-tabs li', function () {
             $('.dragBack').removeClass('dragBack');
         });
@@ -291,6 +301,10 @@
             }
         });
 
+        //浏览器大小改变时自动收放tab
+        $(window).on('resize', function() {
+            $.addtabs.drop();
+        });
     };
 
     $.addtabs = function (options) {
@@ -555,7 +569,6 @@
         })
 
     }
-
 })(jQuery);
 
 $(function () {
