@@ -555,13 +555,14 @@
                     }
                 });
 
-            //如果有超出的，显示下拉标签
+          	//如果有超出的，显示下拉标签 修复bug
             if (collection > 0) {
                 dropdown.removeClass('hide');
                 if (dropdown.find('.active').length == 1) {
                     dropdown.addClass('active');
                 } else {
-                    dropdown.removeClass('active');
+                    $('.dropdown-menu li').removeClass('active');
+					$('.dropdown-menu li').last().addClass('active');
                 }
             } else {
                 dropdown.addClass('hide');
